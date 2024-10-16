@@ -22,7 +22,7 @@ using namespace antlr4;
 
 int main(int , const char **) {
         
-    std::string filename = "../../input.txt";
+    std::string filename = "../../../input.txt";
     
     // Open the file
     std::ifstream fileStream(filename);
