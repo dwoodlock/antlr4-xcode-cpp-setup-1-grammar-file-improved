@@ -1,5 +1,6 @@
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_XCODE_GENERATE_SCHEME TRUE)
 
 # Find the installed Node.js version using the node executable
 find_program(NODE_EXECUTABLE node)
@@ -70,8 +71,6 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
-message (--- ${NODE_API_HEADER_DIR})
-
 if(NOT ${NODE_API_HEADER_STATUS}  EQUAL 0)
     message(FATAL_ERROR "Failed to get header path for node-api-headers ${NODE_API_HEADER_STATUS}\nOutput:\n${NODE_API_HEADER_DIR}\nError:\n${NPM_ERROR}")
 endif()
@@ -91,4 +90,7 @@ target_include_directories(
 
 target_link_options(node-addon PRIVATE -undefined dynamic_lookup)
 
-set_target_properties(node-addon PROPERTIES PREFIX "" SUFFIX ".node")
+set_target_properties(node-addon PROPERTIES PREFIX "" SUFFIX ".node"
+                                            XCODE_SCHEME_EXECUTABLE ${NODE_EXECUTABLE}
+                                            XCODE_SCHEME_ARGUMENTS ${CMAKE_CURRENT_LIST_DIR}/hello.js
+                                            XCODE_SCHEME_WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
