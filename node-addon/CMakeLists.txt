@@ -88,6 +88,7 @@ target_include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/${NODE_API_HEADER_DIR}
 )
 
+target_link_libraries(node-addon antlr-cpp-static)
 target_link_options(node-addon PRIVATE -undefined dynamic_lookup)
 
 set_target_properties(node-addon PROPERTIES PREFIX "" SUFFIX ".node"

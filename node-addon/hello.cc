@@ -1,4 +1,5 @@
 #include <napi.h>
+#include "antlr4-runtime.h"
 
 Napi::String Method(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
