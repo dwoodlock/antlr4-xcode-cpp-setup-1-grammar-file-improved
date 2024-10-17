@@ -88,6 +88,23 @@ target_include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/${NODE_API_HEADER_DIR}
 )
 
+target_compile_definitions(node-addon PRIVATE
+    USING_UV_SHARED=1
+    USING_V8_SHARED=1
+    V8_DEPRECATION_WARNINGS=1
+    V8_DEPRECATION_WARNINGS
+    V8_IMMINENT_DEPRECATION_WARNINGS
+    _GLIBCXX_USE_CXX11_ABI=1
+    _DARWIN_USE_64_BIT_INODE=1
+    _LARGEFILE_SOURCE
+    _FILE_OFFSET_BITS=64
+    OPENSSL_NO_PINSHARED
+    OPENSSL_THREADS
+    NAPI_DISABLE_CPP_EXCEPTIONS
+    BUILDING_NODE_EXTENSION
+    "$<$<CONFIG:DEBUG>:V8_ENABLE_CHECKS>"
+)
+
 target_link_libraries(node-addon antlr-cpp-static)
 target_link_options(node-addon PRIVATE -undefined dynamic_lookup)
 
